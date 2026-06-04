@@ -1,0 +1,32 @@
+name: Create Linear ticket for Dependabot PR
+
+on:
+  pull_request:
+    types: [opened]
+
+concurrency:
+  group: dependabot-linear-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  create-linear-ticket:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+
+    permissions:
+      pull-requests: write
+
+    env:
+      LINEAR_TEAM_ID: ${{ vars.LINEAR_CORE_TEAM_ID }}
+
+    steps:
+      - name: Create Linear ticket
+        uses: benepass/github-actions/actions/dependabot-linear-ticket@c17f372b602484e1791ce5695078ffdd29795f02
+        with:
+          linear_api_key: ${{ secrets.LINEAR_API_KEY }}
+          linear_team_id: ${{ env.LINEAR_TEAM_ID }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_title: ${{ github.event.pull_request.title }}
+          pr_url: ${{ github.event.pull_request.html_url }}
+          pr_number: ${{ github.event.pull_request.number }}
+          repo: ${{ github.repository }}
