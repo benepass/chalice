@@ -23,7 +23,8 @@ jobs:
       - name: Create Linear ticket
         uses: benepass/github-actions/actions/dependabot-linear-ticket@c17f372b602484e1791ce5695078ffdd29795f02
         with:
-          linear_api_key: ${{ secrets.LINEAR_API_KEY }}
+          linear_client_id: ${{ secrets.LINEAR_CLIENT_ID }}
+          linear_client_secret: ${{ secrets.LINEAR_CLIENT_SECRET }}
           linear_team_id: ${{ env.LINEAR_TEAM_ID }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           pr_title: ${{ github.event.pull_request.title }}
