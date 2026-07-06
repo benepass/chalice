@@ -10,18 +10,18 @@ concurrency:
 
 jobs:
   create-linear-ticket:
-    runs-on: ubuntu-latest
+    runs-on: arc-runners-python
     if: github.event.pull_request.user.login == 'dependabot[bot]'
 
     permissions:
       pull-requests: write
 
     env:
-      LINEAR_TEAM_ID: ${{ vars.LINEAR_CORE_TEAM_ID }}
+      LINEAR_TEAM_ID: ${{ secrets.LINEAR_CORE_TEAM_ID }}
 
     steps:
       - name: Create Linear ticket
-        uses: benepass/github-actions/actions/dependabot-linear-ticket@c17f372b602484e1791ce5695078ffdd29795f02
+        uses: benepass/github-actions/actions/dependabot-linear-ticket@dependabot-linear-ticket/v1
         with:
           linear_client_id: ${{ secrets.LINEAR_CLIENT_ID }}
           linear_client_secret: ${{ secrets.LINEAR_CLIENT_SECRET }}
