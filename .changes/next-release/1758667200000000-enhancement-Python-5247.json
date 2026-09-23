@@ -1,0 +1,5 @@
+{
+  "type": "enhancement",
+  "category": "Python",
+  "description": "Drop support for Python 3.8 and 3.9 and upgrade urllib3 to 2.x"
+}
